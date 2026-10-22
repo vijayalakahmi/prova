@@ -1,0 +1,28 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.cta-banner {
+  padding: $space-8 0;
+  background: linear-gradient(120deg, $color-primary 0%, $color-primary-dark 100%);
+  color: $color-white;
+
+  &__inner {
+    @include flex-between;
+    gap: $space-6;
+
+    @include respond-down(md) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  &__title {
+    color: $color-white;
+    margin-bottom: $space-2;
+  }
+
+  &__text {
+    color: rgba($color-white, 0.85);
+    font-size: $font-size-md;
+  }
+}

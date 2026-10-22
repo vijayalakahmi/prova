@@ -1,0 +1,92 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-2;
+  font-weight: $font-weight-semibold;
+  border-radius: $radius-pill;
+  border: 2px solid transparent;
+  white-space: nowrap;
+  transition: background-color $transition-fast, color $transition-fast, border-color $transition-fast,
+    transform $transition-fast, box-shadow $transition-fast;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  // ----- Sizes -----
+  &--sm {
+    padding: $space-2 $space-4;
+    font-size: $font-size-sm;
+  }
+
+  &--md {
+    padding: $space-3 $space-5;
+    font-size: $font-size-base;
+  }
+
+  &--lg {
+    padding: $space-4 $space-6;
+    font-size: $font-size-md;
+  }
+
+  &--full {
+    width: 100%;
+  }
+
+  // ----- Variants -----
+  &--primary {
+    background: $color-primary;
+    color: $color-white;
+
+    &:hover:not(:disabled) {
+      background: $color-primary-dark;
+      color: $color-white;
+      box-shadow: $shadow-md;
+    }
+  }
+
+  &--secondary {
+    background: $color-accent;
+    color: $color-heading;
+
+    &:hover:not(:disabled) {
+      background: $color-accent-dark;
+      color: $color-heading;
+      box-shadow: $shadow-md;
+    }
+  }
+
+  &--outline {
+    background: transparent;
+    color: $color-primary;
+    border-color: $color-primary;
+
+    &:hover:not(:disabled) {
+      background: $color-primary-light;
+      color: $color-primary-dark;
+    }
+  }
+
+  &--ghost {
+    background: transparent;
+    color: $color-text;
+
+    &:hover:not(:disabled) {
+      background: $color-bg-soft;
+      color: $color-primary;
+    }
+  }
+
+  &--loading {
+    pointer-events: none;
+  }
+}

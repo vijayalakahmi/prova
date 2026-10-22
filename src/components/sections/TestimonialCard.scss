@@ -1,0 +1,51 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.testimonial-card {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+
+  &__stars {
+    color: $color-accent;
+    letter-spacing: 2px;
+    font-size: $font-size-md;
+  }
+
+  &__quote {
+    flex: 1;
+    font-size: $font-size-base;
+    line-height: 1.7;
+    color: $color-text;
+  }
+
+  &__author {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+    padding-top: $space-4;
+    border-top: 1px solid $color-border;
+  }
+
+  &__avatar {
+    @include flex-center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: $color-primary;
+    color: $color-white;
+    font-weight: $font-weight-bold;
+    font-family: $font-family-heading;
+  }
+
+  &__name {
+    display: block;
+    color: $color-heading;
+  }
+
+  &__role {
+    display: block;
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+  }
+}

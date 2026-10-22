@@ -1,0 +1,29 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.enquiry-form {
+  display: flex;
+  flex-direction: column;
+  gap: $space-5;
+
+  &--compact {
+    gap: $space-4;
+  }
+
+  &__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $space-4;
+
+    @include respond-down(sm) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__next {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-3;
+    margin-top: $space-4;
+  }
+}

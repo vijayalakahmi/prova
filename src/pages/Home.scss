@@ -1,0 +1,59 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.home-why {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-10;
+  align-items: center;
+
+  @include respond-down(lg) {
+    grid-template-columns: 1fr;
+    gap: $space-8;
+  }
+
+  &__intro .section-heading {
+    margin-bottom: $space-6;
+  }
+
+  &__intro .section-heading__eyebrow {
+    background: rgba($color-white, 0.12);
+    color: $color-accent;
+  }
+
+  &__intro .section-heading__subtitle {
+    color: rgba($color-white, 0.75);
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $space-6;
+
+    @include respond-down(sm) {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+.home-enquiry {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: $space-10;
+  align-items: start;
+
+  @include respond-down(lg) {
+    grid-template-columns: 1fr;
+    gap: $space-6;
+  }
+
+  &__form {
+    @include card;
+    padding: $space-6;
+    box-shadow: $shadow-md;
+
+    @include respond-down(sm) {
+      padding: $space-5;
+    }
+  }
+}

@@ -1,0 +1,38 @@
+@use '../../styles/variables' as *;
+
+.section-heading {
+  max-width: 680px;
+  margin-bottom: $space-8;
+
+  &--center {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &--left {
+    text-align: left;
+  }
+
+  &__eyebrow {
+    display: inline-block;
+    margin-bottom: $space-3;
+    padding: $space-1 $space-3;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $color-primary;
+    background: $color-primary-light;
+    border-radius: $radius-pill;
+  }
+
+  &__title {
+    margin-bottom: $space-3;
+  }
+
+  &__subtitle {
+    font-size: $font-size-md;
+    color: $color-text-muted;
+  }
+}

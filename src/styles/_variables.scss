@@ -1,0 +1,76 @@
+// ---------- Colors ----------
+$color-primary: #1d4ed8;
+$color-primary-dark: #1e40af;
+$color-primary-light: #dbeafe;
+$color-accent: #f59e0b;
+$color-accent-dark: #d97706;
+
+$color-text: #1f2937;
+$color-text-muted: #6b7280;
+$color-heading: #111827;
+
+$color-bg: #ffffff;
+$color-bg-soft: #f8fafc;
+$color-bg-dark: #0f172a;
+
+$color-border: #e5e7eb;
+$color-success: #16a34a;
+$color-error: #dc2626;
+$color-white: #ffffff;
+
+// ---------- Typography ----------
+$font-family-base: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+$font-family-heading: 'Poppins', 'Inter', 'Segoe UI', sans-serif;
+
+$font-size-xs: 0.75rem;
+$font-size-sm: 0.875rem;
+$font-size-base: 1rem;
+$font-size-md: 1.125rem;
+$font-size-lg: 1.25rem;
+$font-size-xl: 1.5rem;
+$font-size-2xl: 2rem;
+$font-size-3xl: 2.75rem;
+
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+$line-height-base: 1.6;
+$line-height-heading: 1.2;
+
+// ---------- Spacing ----------
+$space-1: 0.25rem;
+$space-2: 0.5rem;
+$space-3: 0.75rem;
+$space-4: 1rem;
+$space-5: 1.5rem;
+$space-6: 2rem;
+$space-8: 3rem;
+$space-10: 4rem;
+$space-12: 6rem;
+
+// ---------- Layout ----------
+$container-max: 1200px;
+$container-padding: $space-4;
+$navbar-height: 72px;
+
+// ---------- Borders & Shadows ----------
+$radius-sm: 6px;
+$radius-md: 10px;
+$radius-lg: 16px;
+$radius-pill: 999px;
+
+$shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+$shadow-md: 0 6px 16px rgba(15, 23, 42, 0.08);
+$shadow-lg: 0 16px 40px rgba(15, 23, 42, 0.12);
+
+// ---------- Transitions ----------
+$transition-fast: 0.15s ease;
+$transition-base: 0.25s ease;
+
+// ---------- Breakpoints ----------
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;

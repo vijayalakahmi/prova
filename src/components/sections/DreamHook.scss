@@ -1,0 +1,87 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.dream-hook {
+  &__options {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: $space-4;
+    margin-top: $space-2;
+
+    @include respond-down(lg) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include respond-down(sm) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  &__option {
+    @include card;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $space-3;
+    padding: $space-5 $space-4;
+    text-align: center;
+    transition: transform $transition-base, box-shadow $transition-base, border-color $transition-fast;
+    border: 2px solid transparent;
+    min-height: 120px;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: $shadow-md;
+    }
+
+    &--active {
+      border-color: $color-primary;
+      background: $color-primary-light;
+      box-shadow: $shadow-md;
+    }
+  }
+
+  &__icon {
+    font-size: 1.75rem;
+    line-height: 1;
+  }
+
+  &__label {
+    font-family: $font-family-heading;
+    font-weight: $font-weight-semibold;
+    color: $color-heading;
+    font-size: $font-size-sm;
+  }
+
+  &__followup {
+    margin-top: $space-8;
+    text-align: center;
+    animation: dreamReveal 0.35s ease;
+  }
+
+  &__confirm {
+    font-size: $font-size-md;
+    color: $color-text;
+    margin-bottom: $space-5;
+  }
+
+  &__form {
+    @include card;
+    max-width: 640px;
+    margin: 0 auto;
+    padding: $space-6;
+    text-align: left;
+    box-shadow: $shadow-md;
+  }
+}
+
+@keyframes dreamReveal {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

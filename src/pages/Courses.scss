@@ -1,0 +1,14 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.courses-enquiry {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: $space-10;
+  align-items: start;
+
+  @include respond-down(lg) {
+    grid-template-columns: 1fr;
+    gap: $space-6;
+  }
+}

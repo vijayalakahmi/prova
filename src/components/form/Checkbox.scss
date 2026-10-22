@@ -1,0 +1,71 @@
+@use '../../styles/variables' as *;
+
+.checkbox {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+
+  &__label {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: $space-3;
+    cursor: pointer;
+    font-size: $font-size-sm;
+    color: $color-text;
+  }
+
+  &__input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  &__box {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    border: 2px solid $color-border;
+    border-radius: $radius-sm;
+    background: $color-bg;
+    position: relative;
+    transition: all $transition-fast;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 4px;
+      top: 0;
+      width: 5px;
+      height: 10px;
+      border: solid $color-white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg) scale(0);
+      transition: transform $transition-fast;
+    }
+  }
+
+  &__input:checked + &__box {
+    background: $color-primary;
+    border-color: $color-primary;
+
+    &::after {
+      transform: rotate(45deg) scale(1);
+    }
+  }
+
+  &__input:focus-visible + &__box {
+    box-shadow: 0 0 0 3px rgba($color-primary, 0.2);
+  }
+
+  &__input:disabled + &__box {
+    background: $color-bg-soft;
+    cursor: not-allowed;
+  }
+
+  &__error {
+    font-size: $font-size-xs;
+    color: $color-error;
+  }
+}

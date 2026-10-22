@@ -1,0 +1,37 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.page-header {
+  background: linear-gradient(135deg, $color-bg-dark 0%, $color-primary-dark 100%);
+  color: $color-white;
+  padding: $space-10 0;
+
+  @include respond-down(md) {
+    padding: $space-8 0;
+  }
+
+  &__inner {
+    max-width: 760px;
+    text-align: center;
+  }
+
+  &__eyebrow {
+    display: inline-block;
+    margin-bottom: $space-3;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $color-accent;
+  }
+
+  &__title {
+    color: $color-white;
+    margin-bottom: $space-3;
+  }
+
+  &__description {
+    color: rgba($color-white, 0.8);
+    font-size: $font-size-md;
+  }
+}

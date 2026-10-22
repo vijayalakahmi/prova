@@ -1,0 +1,28 @@
+@use '../../styles/variables' as *;
+
+.feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: $space-4;
+
+  &__title {
+    font-size: $font-size-base;
+    margin-bottom: $space-1;
+  }
+
+  &__text {
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+  }
+
+  // Inside dark sections, invert text colors
+  .section--dark & {
+    &__title {
+      color: $color-white;
+    }
+
+    &__text {
+      color: rgba($color-white, 0.7);
+    }
+  }
+}

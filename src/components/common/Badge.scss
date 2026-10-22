@@ -1,0 +1,30 @@
+@use '../../styles/variables' as *;
+
+.badge {
+  display: inline-block;
+  padding: 2px $space-3;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  border-radius: $radius-pill;
+  line-height: 1.6;
+
+  &--primary {
+    color: $color-primary-dark;
+    background: $color-primary-light;
+  }
+
+  &--accent {
+    color: $color-accent-dark;
+    background: rgba($color-accent, 0.15);
+  }
+
+  &--success {
+    color: $color-success;
+    background: rgba($color-success, 0.12);
+  }
+
+  &--neutral {
+    color: $color-text-muted;
+    background: $color-bg-soft;
+  }
+}

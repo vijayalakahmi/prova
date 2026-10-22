@@ -1,0 +1,68 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.direction-journey {
+  background:
+    radial-gradient(circle at 20% 20%, rgba($color-primary, 0.08), transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba($color-accent, 0.1), transparent 35%),
+    $color-bg;
+
+  &__path {
+    max-width: 520px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  &__node {
+    @include card;
+    width: 100%;
+    padding: $space-5;
+    text-align: center;
+    box-shadow: $shadow-sm;
+    transition: transform $transition-base, box-shadow $transition-base;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: $shadow-md;
+    }
+  }
+
+  &__index {
+    display: block;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    letter-spacing: 0.08em;
+    color: $color-primary;
+    margin-bottom: $space-2;
+  }
+
+  &__label {
+    display: block;
+    font-family: $font-family-heading;
+    font-size: $font-size-lg;
+    color: $color-heading;
+    margin-bottom: $space-1;
+  }
+
+  &__desc {
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+  }
+
+  &__arrow {
+    display: block;
+    padding: $space-2 0;
+    color: $color-primary;
+    font-size: $font-size-lg;
+    line-height: 1;
+  }
+}

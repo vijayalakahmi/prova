@@ -1,0 +1,29 @@
+@use '../../styles/variables' as *;
+
+.select-wrapper {
+  position: relative;
+
+  // Custom chevron so the control looks the same across browsers
+  &::after {
+    content: '';
+    position: absolute;
+    right: $space-4;
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid $color-text-muted;
+    border-bottom: 2px solid $color-text-muted;
+    transform: translateY(-70%) rotate(45deg);
+    pointer-events: none;
+  }
+}
+
+.select {
+  appearance: none;
+  padding-right: $space-8;
+  cursor: pointer;
+
+  &:invalid {
+    color: $color-text-muted;
+  }
+}

@@ -1,0 +1,19 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.card {
+  @include card;
+  height: 100%;
+  transition: transform $transition-base, box-shadow $transition-base, border-color $transition-base;
+
+  &--pad-none { padding: 0; }
+  &--pad-sm { padding: $space-4; }
+  &--pad-md { padding: $space-5; }
+  &--pad-lg { padding: $space-6; }
+
+  &--hover:hover {
+    transform: translateY(-4px);
+    box-shadow: $shadow-lg;
+    border-color: rgba($color-primary, 0.3);
+  }
+}

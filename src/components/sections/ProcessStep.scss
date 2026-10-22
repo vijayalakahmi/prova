@@ -1,0 +1,45 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.process-step {
+  position: relative;
+  text-align: center;
+  padding: 0 $space-3;
+
+  // Connector line between steps on wide screens
+  &:not(&--last)::after {
+    content: '';
+    position: absolute;
+    top: 28px;
+    left: calc(50% + 36px);
+    width: calc(100% - 72px);
+    border-top: 2px dashed $color-border;
+
+    @include respond-down(lg) {
+      display: none;
+    }
+  }
+
+  &__number {
+    @include flex-center;
+    width: 56px;
+    height: 56px;
+    margin: 0 auto $space-4;
+    border-radius: 50%;
+    background: $color-primary;
+    color: $color-white;
+    font-family: $font-family-heading;
+    font-weight: $font-weight-bold;
+    font-size: $font-size-md;
+    box-shadow: 0 0 0 8px $color-primary-light;
+  }
+
+  &__title {
+    margin-bottom: $space-2;
+  }
+
+  &__text {
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+  }
+}

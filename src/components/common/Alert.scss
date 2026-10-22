@@ -1,0 +1,51 @@
+@use 'sass:color';
+@use '../../styles/variables' as *;
+
+.alert {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: $space-4;
+  padding: $space-4;
+  border-radius: $radius-md;
+  border: 1px solid transparent;
+
+  &__title {
+    display: block;
+    margin-bottom: $space-1;
+  }
+
+  &__text {
+    font-size: $font-size-sm;
+    color: inherit;
+  }
+
+  &__close {
+    font-size: $font-size-xl;
+    line-height: 1;
+    color: inherit;
+    opacity: 0.6;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  &--success {
+    color: color.adjust($color-success, $lightness: -10%);
+    background: rgba($color-success, 0.08);
+    border-color: rgba($color-success, 0.3);
+  }
+
+  &--error {
+    color: color.adjust($color-error, $lightness: -10%);
+    background: rgba($color-error, 0.08);
+    border-color: rgba($color-error, 0.3);
+  }
+
+  &--info {
+    color: $color-primary-dark;
+    background: $color-primary-light;
+    border-color: rgba($color-primary, 0.3);
+  }
+}
