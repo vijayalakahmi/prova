@@ -3,6 +3,10 @@ export const siteConfig = {
   shortName: 'PROVA',
   motto: 'Direction to Dreams',
   tagline: 'Helping students find the right course, college and direction for higher education.',
+  logos: {
+    blue: '/logos/prova-logo-blue.png',
+    white: '/logos/prova-logo-white.png',
+  },
   /** Replace with live contact details before launch */
   phone: '+91 98765 43210',
   whatsapp: '919876543210',

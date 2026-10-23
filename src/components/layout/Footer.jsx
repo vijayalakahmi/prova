@@ -12,8 +12,11 @@ function Footer() {
         <div className="footer__grid">
           <div className="footer__brand">
             <Link to="/" className="footer__logo">
-              <span className="footer__logo-mark">P</span>
-              <span>{siteConfig.name}</span>
+              <img
+                src={siteConfig.logos.white}
+                alt={siteConfig.name}
+                className="footer__logo-img"
+              />
             </Link>
             <p className="footer__motto">{siteConfig.motto}</p>
             <p className="footer__tagline">{siteConfig.tagline}</p>

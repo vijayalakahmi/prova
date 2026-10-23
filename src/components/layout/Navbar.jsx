@@ -20,11 +20,12 @@ function Navbar() {
     <header className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`.trim()}>
       <div className="container navbar__inner">
         <Link to="/" className="navbar__brand" onClick={closeMenu}>
-          <span className="navbar__logo">P</span>
-          <span className="navbar__brand-text">
-            <span className="navbar__name">{siteConfig.shortName}</span>
-            <span className="navbar__motto">{siteConfig.motto}</span>
-          </span>
+          <img
+            src={siteConfig.logos.blue}
+            alt={siteConfig.name}
+            className="navbar__logo"
+          />
+          <span className="navbar__motto">{siteConfig.motto}</span>
         </Link>
 
         <button

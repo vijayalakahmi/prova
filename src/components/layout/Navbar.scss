@@ -23,9 +23,12 @@
 
   &__brand {
     display: inline-flex;
-    align-items: center;
-    gap: $space-3;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 2px;
     color: $color-heading;
+    line-height: 1.15;
 
     &:hover {
       color: $color-heading;
@@ -33,34 +36,18 @@
   }
 
   &__logo {
-    @include flex-center;
-    width: 40px;
-    height: 40px;
-    border-radius: $radius-md;
-    background: $color-primary;
-    color: $color-white;
-    font-family: $font-family-heading;
-    font-weight: $font-weight-bold;
-    font-size: $font-size-lg;
-  }
-
-  &__brand-text {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.15;
-  }
-
-  &__name {
-    font-family: $font-family-heading;
-    font-weight: $font-weight-bold;
-    font-size: $font-size-lg;
+    display: block;
+    height: 26px;
+    width: auto;
+    max-width: 140px;
+    object-fit: contain;
   }
 
   &__motto {
-    font-size: $font-size-xs;
+    font-size: 0.7rem;
     font-weight: $font-weight-medium;
     color: $color-primary;
-    letter-spacing: 0.01em;
+    letter-spacing: 0.02em;
   }
 
   &__menu {

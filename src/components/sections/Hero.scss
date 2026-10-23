@@ -67,13 +67,11 @@
   }
 
   &__brand {
-    margin: 0;
-    font-family: $font-family-heading;
-    font-size: clamp(2.5rem, 6vw, 4.25rem);
-    font-weight: $font-weight-bold;
-    letter-spacing: -0.03em;
-    line-height: 1;
-    color: $color-white;
+    display: block;
+    height: clamp(2rem, 5vw, 3.25rem);
+    width: auto;
+    max-width: min(100%, 280px);
+    object-fit: contain;
   }
 
   &__eyebrow {

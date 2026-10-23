@@ -90,7 +90,11 @@ function Hero() {
 
       <div className="container hero__inner">
         <div className="hero__content" key={slide.title}>
-          <p className="hero__brand">{siteConfig.shortName}</p>
+          <img
+            src={siteConfig.logos.white}
+            alt={siteConfig.shortName}
+            className="hero__brand"
+          />
           <p className="hero__eyebrow">Why PROVA · {siteConfig.motto}</p>
           <h1 className="hero__title">{slide.title}</h1>
           <p className="hero__text">{slide.description}</p>

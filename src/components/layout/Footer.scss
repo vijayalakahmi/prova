@@ -42,21 +42,15 @@
   &__logo {
     display: inline-flex;
     align-items: center;
-    gap: $space-3;
-    font-family: $font-family-heading;
-    font-weight: $font-weight-bold;
-    font-size: $font-size-md;
-    color: $color-white;
     margin-bottom: $space-4;
   }
 
-  &__logo-mark {
-    @include flex-center;
-    width: 40px;
-    height: 40px;
-    border-radius: $radius-md;
-    background: $color-primary;
-    color: $color-white;
+  &__logo-img {
+    display: block;
+    height: 32px;
+    width: auto;
+    max-width: 160px;
+    object-fit: contain;
   }
 
   &__tagline {
