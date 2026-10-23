@@ -2,61 +2,199 @@
 @use '../../styles/mixins' as *;
 
 .geo-story {
-  &__trail {
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 0;
-    flex-wrap: wrap;
-    margin: $space-8 0 $space-5;
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
+  position: relative;
+  overflow: hidden;
+  padding: $space-12 0;
+  background:
+    radial-gradient(ellipse 70% 55% at 12% 18%, rgba($color-primary, 0.08), transparent 55%),
+    radial-gradient(ellipse 55% 45% at 88% 82%, rgba($color-accent, 0.1), transparent 50%),
+    $color-bg-soft;
+
+  @include respond-down(md) {
+    padding: $space-8 0;
   }
 
-  &__item {
+  &__inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__trail {
+    list-style: none;
+    margin: $space-10 auto $space-6;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: $space-5;
+    max-width: 960px;
+    align-items: start;
+
+    @include respond-down(lg) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: $space-8 $space-5;
+      max-width: 520px;
+    }
+
+    @include respond-down(sm) {
+      grid-template-columns: 1fr;
+      gap: $space-6;
+      max-width: 260px;
+    }
+  }
+
+  &__stop {
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    flex: 1 1 140px;
-    min-width: 120px;
-    padding: 0 $space-2;
-  }
+    text-align: center;
+    animation: geo-rise 0.65s ease both;
+    animation-delay: calc(var(--stop-i, 0) * 0.1s);
 
-  &__dot {
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background: $color-primary;
-    box-shadow: 0 0 0 6px $color-primary-light;
-    margin-bottom: $space-3;
-    z-index: 1;
-  }
-
-  &__connector {
-    position: absolute;
-    top: 6px;
-    left: calc(50% + 12px);
-    width: calc(100% - 24px);
-    height: 2px;
-    background: linear-gradient(90deg, $color-primary, rgba($color-primary, 0.25));
-
-    @include respond-down(sm) {
-      display: none;
+    &--hub .geo-story__visual {
+      box-shadow:
+        0 0 0 3px $color-accent,
+        0 0 0 7px rgba($color-accent, 0.22),
+        0 10px 24px rgba(15, 23, 42, 0.12);
     }
+
+    &--hub .geo-story__label {
+      color: $color-primary-dark;
+    }
+  }
+
+  &__visual {
+    position: relative;
+    flex-shrink: 0;
+    width: 112px;
+    height: 112px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: $color-bg-dark;
+    box-shadow:
+      0 0 0 3px $color-white,
+      0 10px 24px rgba(15, 23, 42, 0.12);
+    transition: transform $transition-base, box-shadow $transition-base;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    @include respond-down(md) {
+      width: 100px;
+      height: 100px;
+    }
+  }
+
+  &__stop:hover .geo-story__visual {
+    transform: translateY(-3px);
+
+    img {
+      transform: scale(1.05);
+    }
+  }
+
+  &__hub-badge {
+    position: absolute;
+    left: 50%;
+    bottom: 8px;
+    z-index: 1;
+    transform: translateX(-50%);
+    padding: 0.2rem 0.5rem;
+    border-radius: $radius-sm;
+    background: rgba(15, 23, 42, 0.82);
+    color: $color-accent;
+    font-size: 0.65rem;
+    font-weight: $font-weight-semibold;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  &__copy {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $space-1;
+    margin-top: $space-4;
+    width: 100%;
+    min-height: 4.5rem;
   }
 
   &__label {
     font-family: $font-family-heading;
-    font-size: $font-size-sm;
+    font-size: $font-size-md;
+    font-weight: $font-weight-semibold;
     color: $color-heading;
-    text-align: center;
+    line-height: 1.25;
+  }
+
+  &__tagline {
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+    line-height: 1.45;
+    max-width: 11.5rem;
+  }
+
+  &__connector {
+    display: none;
+
+    @include respond-up(lg) {
+      display: block;
+      position: absolute;
+      top: 56px;
+      left: calc(50% + 64px);
+      width: calc(100% - 128px + #{$space-5});
+      height: 2px;
+      background: linear-gradient(
+        90deg,
+        rgba($color-primary, 0.55),
+        rgba($color-primary, 0.2)
+      );
+      z-index: 0;
+      pointer-events: none;
+    }
   }
 
   &__note {
-    font-size: $font-size-md;
-    max-width: 520px;
     margin: 0 auto;
+    max-width: 34rem;
+    text-align: center;
+    font-size: $font-size-md;
+    color: $color-text-muted;
+    line-height: 1.65;
+  }
+
+  &__cta {
+    margin-top: $space-6;
+    text-align: center;
+  }
+}
+
+@keyframes geo-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .geo-story {
+    &__stop {
+      animation: none;
+    }
+
+    &__stop:hover .geo-story__visual img {
+      transform: none;
+    }
   }
 }
