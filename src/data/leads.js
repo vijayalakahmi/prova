@@ -2,6 +2,7 @@
  * Lead payload shape for Google Sheet / future CRM integration.
  *
  * {
+ *   submissionId,
  *   name,
  *   phone,
  *   email?,
@@ -11,12 +12,16 @@
  *   message?,
  *   consent,
  *   source?,
- *   dreamSelection?
+ *   dreamSelection?,
+ *   createdAt
  * }
+ *
+ * PROVA Lead ID, Processed At, and Internal Notes stay empty in the sheet.
  */
 
 export function buildLeadPayload(values, meta = {}) {
   return {
+    submissionId: crypto.randomUUID(),
     name: values.name.trim(),
     phone: values.phone.replace(/\s/g, ''),
     email: values.email?.trim() || '',

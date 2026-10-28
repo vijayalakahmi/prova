@@ -3,8 +3,8 @@
  *
  * SETUP
  * 1. Create a Google Sheet. Rename the first tab to "Leads".
- * 2. Put this header row in A1:J1:
- *    Timestamp | Name | Phone | Email | Course Interest | Qualification | Preferred Location | Message | Consent | Source | Dream Selection
+ * 2. Put this header row in A1:P1:
+ *    Submission ID | Submission Timestamp | Name as Submitted | Phone as Submitted | Email | Course Interest | Qualification | Preferred Location | Message | Consent Response | Form Source | Dream Selection | Processing Status | PROVA Lead ID | Processed At | Internal Notes
  * 3. Extensions → Apps Script → paste this file → Save.
  * 4. Deploy → New deployment → Type: Web app
  *    - Execute as: Me
@@ -31,6 +31,7 @@ function doPost(e) {
     }
 
     sheet.appendRow([
+      data.submissionId || Utilities.getUuid(),
       data.createdAt || new Date().toISOString(),
       data.name || '',
       data.phone || '',
@@ -42,6 +43,10 @@ function doPost(e) {
       data.consent === true || data.consent === 'true' ? 'Yes' : 'No',
       data.source || '',
       data.dreamSelection || '',
+      'New',
+      '',
+      '',
+      '',
     ]);
 
     return json_({ ok: true });
