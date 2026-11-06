@@ -94,8 +94,8 @@ export const whyProva = [
     title: 'End-to-end support',
     description: 'From course selection to admission guidance — one clear path.',
     image:
-      'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1920&q=80',
-    imageAlt: 'Graduation celebration after guided admissions journey',
+      'https://images.unsplash.com/photo-1606761568499-6d2451b23c66?auto=format&fit=crop&w=1920&q=80',
+    imageAlt: 'Students on campus representing end-to-end course and admission support',
   },
   {
     icon: '💰',
