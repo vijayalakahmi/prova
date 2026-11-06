@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Button } from '../common';
-import { courseFields, countCoursesInField } from '../../data/courses';
+import { courseFields } from '../../data/courses';
 import './CourseExplorer.scss';
 
 function CourseExplorer() {
@@ -58,44 +58,34 @@ function CourseExplorer() {
           </div>
 
           <div className="course-gallery" role="list">
-            {courseFields.map((field) => {
-              const count = countCoursesInField(field);
-              return (
-                <button
-                  key={field.id}
-                  type="button"
-                  role="listitem"
-                  className={`course-gallery__card course-gallery__card--${field.tone}`}
-                  onClick={() => openField(field.id)}
-                >
-                  <div className="course-gallery__media">
-                    <img
-                      src={field.image}
-                      alt={field.imageAlt}
-                      style={{ objectPosition: field.imagePosition || 'center' }}
-                      loading="lazy"
-                    />
-                  </div>
+            {courseFields.map((field) => (
+              <button
+                key={field.id}
+                type="button"
+                role="listitem"
+                className={`course-gallery__card course-gallery__card--${field.tone}`}
+                onClick={() => openField(field.id)}
+              >
+                <div className="course-gallery__media">
+                  <img
+                    src={field.image}
+                    alt={field.imageAlt}
+                    style={{ objectPosition: field.imagePosition || 'center' }}
+                    loading="lazy"
+                  />
+                </div>
 
-                  <div className="course-gallery__body">
-                    <div className="course-gallery__top">
-                      <h3>{field.name}</h3>
-                      {count > 0 ? (
-                        <span className="course-gallery__count">{count}</span>
-                      ) : (
-                        <span className="course-gallery__count course-gallery__count--soft">?</span>
-                      )}
-                    </div>
-                    <p>{field.description}</p>
-                    <div className="course-gallery__tags">
-                      {field.tags.map((tag) => (
-                        <span key={tag}>{tag}</span>
-                      ))}
-                    </div>
+                <div className="course-gallery__body">
+                  <h3>{field.name}</h3>
+                  <p>{field.description}</p>
+                  <div className="course-gallery__tags">
+                    {field.tags.map((tag) => (
+                      <span key={tag}>{tag}</span>
+                    ))}
                   </div>
-                </button>
-              );
-            })}
+                </div>
+              </button>
+            ))}
           </div>
         </div>
       </section>
@@ -146,8 +136,7 @@ function CourseExplorer() {
                       setOpenCourseId(null);
                     }}
                   >
-                    <strong>{sub.name}</strong>
-                    <span>{sub.courses.length}</span>
+                    {sub.name}
                   </button>
                 ))}
               </div>
@@ -174,12 +163,7 @@ function CourseExplorer() {
               {visibleSubs.map((sub) => (
                 <section key={sub.id} className="course-panel">
                   <div className="course-panel__head">
-                    <div>
-                      <h3>{sub.name}</h3>
-                      <p>
-                        {sub.courses.length} course{sub.courses.length === 1 ? '' : 's'} in this pathway
-                      </p>
-                    </div>
+                    <h3>{sub.name}</h3>
                   </div>
 
                   <div className="course-cards">
