@@ -1,70 +1,58 @@
-import { useState } from 'react';
-import { SectionHeading, Button } from '../common';
+import { Link } from 'react-router-dom';
+import { SectionHeading } from '../common';
 import { dreamOptions } from '../../data/courses';
-import EnquiryForm from './EnquiryForm';
 import './DreamHook.scss';
 
 function DreamHook() {
-  const [selected, setSelected] = useState(null);
-  const [showForm, setShowForm] = useState(false);
-
-  const handleSelect = (option) => {
-    setSelected(option);
-    setShowForm(false);
-  };
-
   return (
     <section className="section section--soft dream-hook" id="dream">
       <div className="container">
         <SectionHeading
           eyebrow="Start here"
           title="What's your dream?"
-          subtitle="Pick one. We'll help you find the direction from there."
+          subtitle="Pick one. We'll take you to that field so you can explore courses from there."
         />
 
         <div className="dream-hook__options" role="list">
-          {dreamOptions.map((option) => {
-            const isActive = selected?.id === option.id;
-            return (
-              <button
-                key={option.id}
-                type="button"
-                role="listitem"
-                className={`dream-hook__option ${isActive ? 'dream-hook__option--active' : ''}`.trim()}
-                onClick={() => handleSelect(option)}
-                aria-pressed={isActive}
-              >
-                <span className="dream-hook__icon" aria-hidden="true">
+          {dreamOptions.map((option) => (
+            <Link
+              key={option.id}
+              to={`/courses?field=${option.id}`}
+              role="listitem"
+              className={`dream-hook__option dream-hook__option--${option.tone}`}
+            >
+              <div className="dream-hook__media">
+                <img
+                  src={option.image}
+                  alt={option.imageAlt}
+                  className="dream-hook__image"
+                  style={{ objectPosition: option.imagePosition || 'center' }}
+                  loading="lazy"
+                />
+                <span className="dream-hook__badge" aria-hidden="true">
                   {option.icon}
                 </span>
-                <span className="dream-hook__label">{option.label}</span>
-              </button>
-            );
-          })}
-        </div>
-
-        {selected && (
-          <div className="dream-hook__followup">
-            <p className="dream-hook__confirm">
-              Great. Let&apos;s find your direction for <strong>{selected.label}</strong>.
-            </p>
-            {!showForm ? (
-              <Button size="lg" onClick={() => setShowForm(true)}>
-                Help Me Choose
-              </Button>
-            ) : (
-              <div className="dream-hook__form">
-                <EnquiryForm
-                  compact
-                  initialCourseInterest={selected.courseInterest}
-                  dreamSelection={selected.id}
-                  source="dream-hook"
-                  submitLabel="Find My Options"
-                />
+                <span className="dream-hook__hint">Open field →</span>
               </div>
-            )}
-          </div>
-        )}
+
+              <div className="dream-hook__body">
+                <div className="dream-hook__row">
+                  <span className="dream-hook__label">{option.label}</span>
+                  <span className="dream-hook__cta" aria-hidden="true">
+                    Explore ↗
+                  </span>
+                </div>
+                <div className="dream-hook__tags">
+                  {option.tags.map((tag) => (
+                    <span key={tag} className="dream-hook__tag">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
     </section>
   );

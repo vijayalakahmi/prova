@@ -2,86 +2,228 @@
 @use '../../styles/mixins' as *;
 
 .dream-hook {
+  > .container {
+    max-width: 1360px;
+  }
+
   &__options {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: $space-4;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: $space-5;
     margin-top: $space-2;
+    align-items: stretch;
 
-    @include respond-down(lg) {
-      grid-template-columns: repeat(3, 1fr);
+    @include respond-down(md) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     @include respond-down(sm) {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: 1fr;
+      gap: $space-4;
     }
   }
 
   &__option {
-    @include card;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: $space-3;
-    padding: $space-5 $space-4;
-    text-align: center;
-    transition: transform $transition-base, box-shadow $transition-base, border-color $transition-fast;
-    border: 2px solid transparent;
-    min-height: 120px;
+    padding: 8px;
+    text-align: left;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    font: inherit;
+    color: inherit;
+    text-decoration: none;
+    background: $color-white;
+    border: 1px solid rgba($color-border, 0.9);
+    border-radius: 24px;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+    overflow: hidden;
+    transition:
+      transform $transition-base,
+      box-shadow $transition-base,
+      border-color $transition-fast;
 
     &:hover {
       transform: translateY(-4px);
-      box-shadow: $shadow-md;
+      box-shadow: 0 14px 28px rgba(15, 23, 42, 0.1);
+
+      .dream-hook__image {
+        transform: scale(1.04);
+      }
+
+      .dream-hook__cta {
+        color: $color-primary-dark;
+      }
+
+      .dream-hook__hint {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    &--active {
-      border-color: $color-primary;
-      background: $color-primary-light;
-      box-shadow: $shadow-md;
+    &:focus-visible {
+      @include focus-ring;
+    }
+
+    &--teal .dream-hook__media {
+      background: linear-gradient(160deg, #d8f3ef 0%, #b8e4dc 100%);
+    }
+
+    &--indigo .dream-hook__media {
+      background: linear-gradient(160deg, #dde5ff 0%, #c7d2fe 100%);
+    }
+
+    &--amber .dream-hook__media {
+      background: linear-gradient(160deg, #fef3c7 0%, #fde68a 100%);
+    }
+
+    &--rose .dream-hook__media {
+      background: linear-gradient(160deg, #fce7f3 0%, #fbcfe8 100%);
+    }
+
+    &--violet .dream-hook__media {
+      background: linear-gradient(160deg, #ede9fe 0%, #ddd6fe 100%);
+    }
+
+    &--slate .dream-hook__media {
+      background: linear-gradient(160deg, #e2e8f0 0%, #cbd5e1 100%);
     }
   }
 
-  &__icon {
-    font-size: 1.75rem;
-    line-height: 1;
+  &__media {
+    position: relative;
+    aspect-ratio: 4 / 3.4;
+    min-height: 148px;
+    border-radius: 18px;
+    overflow: hidden;
+    isolation: isolate;
+    flex: 0 0 auto;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.45s ease;
+  }
+
+  &__media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      transparent 50%,
+      rgba(15, 23, 42, 0.25) 100%
+    );
+    pointer-events: none;
+  }
+
+  &__badge {
+    position: absolute;
+    top: $space-3;
+    right: $space-3;
+    z-index: 1;
+    @include flex-center;
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+    background: rgba($color-white, 0.92);
+    box-shadow: $shadow-sm;
+    font-size: 1.05rem;
+    backdrop-filter: blur(6px);
+  }
+
+  &__hint {
+    position: absolute;
+    left: $space-2;
+    right: $space-2;
+    bottom: $space-2;
+    z-index: 1;
+    padding: 0.3rem 0.6rem;
+    border-radius: $radius-pill;
+    background: rgba(15, 23, 42, 0.55);
+    color: $color-white;
+    font-size: 0.65rem;
+    font-weight: $font-weight-medium;
+    letter-spacing: 0.01em;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity $transition-base, transform $transition-base;
+    backdrop-filter: blur(4px);
+  }
+
+  &__option:hover &__hint {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: $space-3;
+    padding: $space-3 $space-2 $space-2;
+    background: $color-white;
+  }
+
+  &__row {
+    @include flex-between;
+    gap: $space-2;
+    align-items: baseline;
   }
 
   &__label {
     font-family: $font-family-heading;
-    font-weight: $font-weight-semibold;
+    font-weight: $font-weight-bold;
     color: $color-heading;
     font-size: $font-size-sm;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
-  &__followup {
-    margin-top: $space-8;
+  &__cta {
+    flex-shrink: 0;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    color: $color-text-muted;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color $transition-fast;
+  }
+
+  &__tags {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.35rem;
+    width: 100%;
+    align-items: stretch;
+  }
+
+  &__tag {
+    display: block;
+    box-sizing: border-box;
+    min-width: 0;
+    height: 1.7rem;
+    padding: 0 0.3rem;
+    border-radius: $radius-pill;
+    background: $color-bg-soft;
+    color: $color-text-muted;
+    font-size: 0.62rem;
+    font-weight: $font-weight-medium;
+    line-height: calc(1.7rem - 2px);
+    border: 1px solid rgba($color-border, 0.8);
     text-align: center;
-    animation: dreamReveal 0.35s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
-  &__confirm {
-    font-size: $font-size-md;
-    color: $color-text;
-    margin-bottom: $space-5;
-  }
-
-  &__form {
-    @include card;
-    max-width: 640px;
-    margin: 0 auto;
-    padding: $space-6;
-    text-align: left;
-    box-shadow: $shadow-md;
-  }
-}
-
-@keyframes dreamReveal {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }

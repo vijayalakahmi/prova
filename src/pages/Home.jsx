@@ -17,7 +17,7 @@ function Home() {
 
       <DreamHook />
 
-      <CourseCategories limit={4} />
+      <CourseCategories />
 
       <section className="section section--soft">
         <div className="container">

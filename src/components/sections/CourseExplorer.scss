@@ -1,0 +1,665 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.course-explorer {
+  background:
+    radial-gradient(circle at top left, rgba($color-primary, 0.06), transparent 40%),
+    radial-gradient(circle at top right, rgba($color-accent, 0.08), transparent 36%),
+    $color-bg;
+
+  &__gallery-wrap {
+    max-width: 1180px;
+  }
+
+  &__gallery-head {
+    text-align: center;
+    max-width: 40rem;
+    margin: 0 auto $space-8;
+  }
+
+  &__kicker {
+    margin: 0 0 $space-2;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $color-primary;
+  }
+
+  &__gallery-title {
+    margin: 0 0 $space-3;
+    font-family: $font-family-heading;
+    font-size: clamp(1.75rem, 3vw, 2.35rem);
+    font-weight: $font-weight-bold;
+    color: $color-heading;
+    line-height: 1.2;
+  }
+
+  &__gallery-sub {
+    margin: 0;
+    color: $color-text-muted;
+    font-size: $font-size-md;
+    line-height: 1.6;
+  }
+
+  &__back {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-2;
+    margin-bottom: $space-5;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: $color-primary;
+    font: inherit;
+    font-weight: $font-weight-semibold;
+    cursor: pointer;
+    transition: color $transition-fast;
+
+    &:hover {
+      color: $color-primary-dark;
+    }
+  }
+
+  &__footnote {
+    margin: $space-8 0 0;
+    padding: $space-4 $space-5;
+    border-radius: $radius-lg;
+    background: rgba($color-accent, 0.1);
+    border: 1px solid rgba($color-accent, 0.25);
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+    line-height: 1.55;
+  }
+}
+
+/* ---- Step 1: category gallery ---- */
+.course-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: $space-5;
+
+  @include respond-down(lg) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include respond-down(sm) {
+    grid-template-columns: 1fr;
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    text-align: left;
+    cursor: pointer;
+    appearance: none;
+    font: inherit;
+    color: inherit;
+    background: $color-white;
+    border: 1px solid rgba($color-border, 0.95);
+    border-radius: 24px;
+    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.07);
+    overflow: hidden;
+    transition:
+      transform $transition-base,
+      box-shadow $transition-base,
+      border-color $transition-fast;
+
+    &:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 36px rgba(15, 23, 42, 0.12);
+
+      .course-gallery__media img {
+        transform: scale(1.05);
+      }
+
+      .course-gallery__hint {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    &:focus-visible {
+      @include focus-ring;
+    }
+
+    &--teal .course-gallery__media {
+      background: linear-gradient(160deg, #d8f3ef, #b8e4dc);
+    }
+
+    &--indigo .course-gallery__media {
+      background: linear-gradient(160deg, #dde5ff, #c7d2fe);
+    }
+
+    &--amber .course-gallery__media {
+      background: linear-gradient(160deg, #fef3c7, #fde68a);
+    }
+
+    &--violet .course-gallery__media {
+      background: linear-gradient(160deg, #ede9fe, #ddd6fe);
+    }
+
+    &--rose .course-gallery__media {
+      background: linear-gradient(160deg, #fce7f3, #fbcfe8);
+    }
+
+    &--slate .course-gallery__media {
+      background: linear-gradient(160deg, #e2e8f0, #cbd5e1);
+    }
+  }
+
+  &__media {
+    position: relative;
+    aspect-ratio: 16 / 11;
+    border-radius: 18px;
+    overflow: hidden;
+    isolation: isolate;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.45s ease;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 45%, rgba(15, 23, 42, 0.35) 100%);
+      pointer-events: none;
+    }
+  }
+
+  &__badge {
+    position: absolute;
+    top: $space-3;
+    left: $space-3;
+    z-index: 1;
+    @include flex-center;
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+    background: rgba($color-white, 0.94);
+    box-shadow: $shadow-sm;
+    font-size: 1.2rem;
+    backdrop-filter: blur(6px);
+  }
+
+  &__hint {
+    position: absolute;
+    right: $space-3;
+    bottom: $space-3;
+    z-index: 1;
+    padding: 0.35rem 0.75rem;
+    border-radius: $radius-pill;
+    background: rgba(15, 23, 42, 0.72);
+    color: $color-white;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity $transition-base, transform $transition-base;
+    backdrop-filter: blur(4px);
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: $space-3;
+    padding: $space-4 $space-2 $space-2;
+    flex: 1;
+  }
+
+  &__top {
+    @include flex-between;
+    gap: $space-3;
+    align-items: flex-start;
+
+    h3 {
+      margin: 0;
+      font-family: $font-family-heading;
+      font-size: $font-size-md;
+      font-weight: $font-weight-bold;
+      line-height: 1.3;
+      color: $color-heading;
+    }
+  }
+
+  &__count {
+    @include flex-center;
+    min-width: 2rem;
+    height: 2rem;
+    padding: 0 0.55rem;
+    border-radius: $radius-pill;
+    background: $color-primary-light;
+    color: $color-primary-dark;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-bold;
+    flex-shrink: 0;
+
+    &--soft {
+      background: $color-bg-soft;
+      color: $color-text-muted;
+    }
+  }
+
+  &__body p {
+    margin: 0;
+    flex: 1;
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+    line-height: 1.55;
+    @include truncate(3);
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+
+    span {
+      padding: 0.25rem 0.65rem;
+      border-radius: $radius-pill;
+      background: $color-bg-soft;
+      border: 1px solid rgba($color-border, 0.85);
+      font-size: 0.7rem;
+      font-weight: $font-weight-medium;
+      color: $color-text-muted;
+    }
+  }
+}
+
+/* ---- Step 2: field hero ---- */
+.course-hero {
+  display: grid;
+  grid-template-columns: 1.05fr 1.2fr;
+  gap: 0;
+  margin-bottom: $space-6;
+  border-radius: 28px;
+  overflow: hidden;
+  background: $color-white;
+  border: 1px solid $color-border;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+  animation: courseReveal 0.35s ease;
+
+  @include respond-down(md) {
+    grid-template-columns: 1fr;
+  }
+
+  &__media {
+    min-height: 240px;
+    position: relative;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent 60%, rgba(255, 255, 255, 0.15));
+    }
+
+    @include respond-down(md) {
+      min-height: 180px;
+      aspect-ratio: 16 / 9;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: $space-8 $space-6;
+    position: relative;
+
+    @include respond-down(md) {
+      padding: $space-5;
+    }
+  }
+
+  &__icon {
+    @include flex-center;
+    width: 48px;
+    height: 48px;
+    margin-bottom: $space-4;
+    border-radius: 16px;
+    background: $color-bg-soft;
+    font-size: 1.4rem;
+  }
+
+  &__eyebrow {
+    margin: 0 0 $space-2;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $color-primary;
+  }
+
+  &__title {
+    margin: 0 0 $space-3;
+    font-family: $font-family-heading;
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    font-weight: $font-weight-bold;
+    color: $color-heading;
+    line-height: 1.2;
+  }
+
+  &__desc {
+    margin: 0;
+    color: $color-text-muted;
+    line-height: 1.6;
+    max-width: 36rem;
+  }
+
+  &__meta {
+    margin: $space-4 0 0;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $color-heading;
+  }
+
+  &--teal &__icon {
+    background: #f0fdfa;
+  }
+
+  &--indigo &__icon {
+    background: #eef2ff;
+  }
+
+  &--amber &__icon {
+    background: #fffbeb;
+  }
+
+  &--violet &__icon {
+    background: #f5f3ff;
+  }
+
+  &--rose &__icon {
+    background: #fff1f2;
+  }
+
+  &--slate &__icon {
+    background: #f8fafc;
+  }
+}
+
+/* ---- Subcategory chips ---- */
+.course-subs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+  margin-bottom: $space-6;
+  animation: courseReveal 0.4s ease;
+
+  &__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-2;
+    padding: 0.7rem 1rem;
+    border-radius: $radius-pill;
+    border: 1px solid $color-border;
+    background: $color-white;
+    color: $color-text;
+    font: inherit;
+    cursor: pointer;
+    box-shadow: $shadow-sm;
+    transition: background $transition-fast, border-color $transition-fast, color $transition-fast,
+      transform $transition-fast;
+
+    strong {
+      font-size: $font-size-sm;
+      font-weight: $font-weight-semibold;
+    }
+
+    span {
+      @include flex-center;
+      min-width: 1.4rem;
+      height: 1.4rem;
+      padding: 0 0.35rem;
+      border-radius: $radius-pill;
+      background: $color-bg-soft;
+      font-size: $font-size-xs;
+      color: $color-text-muted;
+    }
+
+    &:hover {
+      transform: translateY(-1px);
+      border-color: #d1d5db;
+    }
+
+    &.is-active {
+      background: $color-heading;
+      border-color: $color-heading;
+      color: $color-white;
+
+      span {
+        background: rgba($color-white, 0.18);
+        color: $color-white;
+      }
+    }
+  }
+}
+
+/* ---- Course panels + cards ---- */
+.course-panels {
+  display: flex;
+  flex-direction: column;
+  gap: $space-8;
+}
+
+.course-panel {
+  animation: courseReveal 0.35s ease;
+
+  &__head {
+    margin-bottom: $space-4;
+
+    h3 {
+      margin: 0 0 $space-1;
+      font-family: $font-family-heading;
+      font-size: $font-size-xl;
+      font-weight: $font-weight-bold;
+      color: $color-heading;
+    }
+
+    p {
+      margin: 0;
+      font-size: $font-size-sm;
+      color: $color-text-muted;
+    }
+  }
+}
+
+.course-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: $space-4;
+
+  @include respond-down(md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.course-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  background: $color-white;
+  border: 1px solid $color-border;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.05);
+  overflow: hidden;
+  transition: border-color $transition-fast, box-shadow $transition-base, transform $transition-base;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 30px rgba(15, 23, 42, 0.09);
+  }
+
+  &.is-open {
+    border-color: rgba($color-primary, 0.35);
+    box-shadow: 0 16px 34px rgba($color-primary, 0.12);
+  }
+
+  &__face {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $space-3;
+    width: 100%;
+    padding: $space-5;
+    border: 0;
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
+    color: inherit;
+    font: inherit;
+  }
+
+  &__topline {
+    @include flex-between;
+    gap: $space-3;
+    width: 100%;
+    align-items: flex-start;
+
+    h4 {
+      margin: 0;
+      font-family: $font-family-heading;
+      font-size: $font-size-md;
+      font-weight: $font-weight-bold;
+      color: $color-heading;
+      line-height: 1.35;
+    }
+  }
+
+  &__plus {
+    @include flex-center;
+    width: 30px;
+    height: 30px;
+    border-radius: $radius-pill;
+    background: $color-bg-soft;
+    border: 1px solid $color-border;
+    color: $color-text-muted;
+    font-size: 1.05rem;
+    flex-shrink: 0;
+  }
+
+  &__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-2;
+
+    span {
+      padding: 0.2rem 0.6rem;
+      border-radius: $radius-pill;
+      background: $color-bg-soft;
+      border: 1px solid rgba($color-border, 0.9);
+      font-size: $font-size-xs;
+      color: $color-text-muted;
+    }
+  }
+
+  &__pill {
+    background: rgba($color-accent, 0.14) !important;
+    border-color: rgba($color-accent, 0.35) !important;
+    color: $color-accent-dark !important;
+    font-weight: $font-weight-semibold;
+  }
+
+  &__blurb {
+    margin: 0;
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+    line-height: 1.55;
+    @include truncate(3);
+  }
+
+  &__more {
+    margin-top: auto;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $color-primary;
+  }
+
+  &__detail {
+    padding: 0 $space-5 $space-5;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $space-4;
+    animation: courseReveal 0.25s ease;
+  }
+
+  &__scope {
+    width: 100%;
+    padding: $space-4;
+    border-radius: 14px;
+    background: linear-gradient(160deg, $color-bg-soft, rgba($color-primary-light, 0.45));
+
+    h5 {
+      margin: 0 0 $space-2;
+      font-size: $font-size-xs;
+      font-weight: $font-weight-semibold;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: $color-primary-dark;
+    }
+
+    p {
+      margin: 0;
+      font-size: $font-size-sm;
+      color: $color-text;
+      line-height: 1.6;
+    }
+  }
+}
+
+.course-explore-panel {
+  margin-top: $space-2;
+  border-radius: 28px;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba($color-primary, 0.08), rgba($color-accent, 0.12)),
+    $color-white;
+  border: 1px solid $color-border;
+  box-shadow: $shadow-md;
+  animation: courseReveal 0.35s ease;
+
+  &__inner {
+    max-width: 36rem;
+    margin: 0 auto;
+    padding: $space-10 $space-6;
+    text-align: center;
+
+    h3 {
+      margin: 0 0 $space-3;
+      font-family: $font-family-heading;
+      font-size: $font-size-xl;
+      color: $color-heading;
+    }
+
+    p {
+      margin: 0 0 $space-5;
+      color: $color-text-muted;
+      line-height: 1.65;
+    }
+  }
+}
+
+@keyframes courseReveal {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

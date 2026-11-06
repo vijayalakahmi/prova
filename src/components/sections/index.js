@@ -8,6 +8,7 @@ export { default as CtaBanner } from './CtaBanner';
 export { default as EnquiryForm } from './EnquiryForm';
 export { default as DreamHook } from './DreamHook';
 export { default as CourseCategories } from './CourseCategories';
+export { default as CourseExplorer } from './CourseExplorer';
 export { default as DirectionJourney } from './DirectionJourney';
 export { default as GeographicStory } from './GeographicStory';
 export { default as StoriesPlaceholder } from './StoriesPlaceholder';

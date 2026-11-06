@@ -74,14 +74,6 @@ export const processSteps = [
 
 export const whyProva = [
   {
-    icon: '🎯',
-    title: 'Direction before admission',
-    description: 'We help students understand options before locking into a college.',
-    image:
-      'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1920&q=80',
-    imageAlt: 'Students collaborating on campus during counselling guidance',
-  },
-  {
     icon: '🧑‍🎓',
     title: 'Student-first guidance',
     description: 'Recommendations consider interests, eligibility, goals and budget.',
@@ -90,20 +82,12 @@ export const whyProva = [
     imageAlt: 'Students working together on higher education plans',
   },
   {
-    icon: '📍',
-    title: 'Local Bangalore access',
-    description: 'Bangalore presence means local knowledge and institutional access on the ground.',
+    icon: '🤝',
+    title: 'Human counselling',
+    description: 'Speak with a real counsellor. You do not have to figure this out alone.',
     image:
-      'https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1920&q=80',
-    imageAlt: 'University campus representing local Bangalore college access',
-  },
-  {
-    icon: '🗺️',
-    title: 'Multi-state reach',
-    description: 'Students can approach PROVA from Kerala, Karnataka, Tamil Nadu and beyond.',
-    image:
-      'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1920&q=80',
-    imageAlt: 'Student preparing for higher studies across states',
+      'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=1920&q=80',
+    imageAlt: 'One-on-one education counselling conversation',
   },
   {
     icon: '🔗',
@@ -114,12 +98,37 @@ export const whyProva = [
     imageAlt: 'Graduation celebration after guided admissions journey',
   },
   {
-    icon: '🤝',
-    title: 'Human counselling',
-    description: 'Speak with a real counsellor. You do not have to figure this out alone.',
+    icon: '💰',
+    title: 'Financial Support for Your Education',
+    description:
+      'Explore education loans, government financial assistance schemes, scholarships and special benefits available to eligible students, including schemes designed specifically for female students.',
     image:
-      'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=1920&q=80',
-    imageAlt: 'One-on-one education counselling conversation',
+      'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1920&q=80',
+    imageAlt: 'Planning education finances with loans, scholarships and assistance schemes',
+  },
+  {
+    icon: '📍',
+    title: 'Local Bangalore access and college visit',
+    description: 'Bangalore presence means local knowledge, institutional access and college visits on the ground.',
+    image:
+      'https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1920&q=80',
+    imageAlt: 'University campus representing local Bangalore college access and visits',
+  },
+  {
+    icon: '🗺️',
+    title: 'Multi-state reach',
+    description: 'Students can approach PROVA from Kerala, Karnataka, Tamil Nadu and beyond.',
+    image:
+      'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1920&q=80',
+    imageAlt: 'Student preparing for higher studies across states',
+  },
+  {
+    icon: '🎯',
+    title: 'Direction before admission',
+    description: 'We help students understand options before locking into a college.',
+    image:
+      'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1920&q=80',
+    imageAlt: 'Students collaborating on campus during counselling guidance',
   },
 ];
 

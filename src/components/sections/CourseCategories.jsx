@@ -12,12 +12,12 @@ function CourseCategories({ limit, showCta = true }) {
         <SectionHeading
           eyebrow="Courses"
           title="Explore where you could go"
-          subtitle="Start with a category. We'll help you narrow it to the right course and college."
+          subtitle="Start with a field. On the courses page you can browse every pathway, subcategory by subcategory."
         />
 
         <div className="grid grid--2 course-categories__grid">
           {categories.map((category) => (
-            <Card key={category.id} hover className="course-category">
+            <Card key={category.id} hover className="course-category" as={Link} to={`/courses?field=${category.id}`}>
               <div className="course-category__head">
                 <span className="course-category__icon" aria-hidden="true">
                   {category.icon}
@@ -27,16 +27,12 @@ function CourseCategories({ limit, showCta = true }) {
                   <p className="course-category__desc">{category.description}</p>
                 </div>
               </div>
-              <ul className="course-category__list">
-                {category.courses.map((course) => (
-                  <li key={course.id}>
-                    <Link to={`/contact?interest=${course.id}`} className="course-category__link">
-                      <span>{course.name}</span>
-                      <span className="course-category__level">{course.level}</span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+              <div className="course-category__footer">
+                <span className="course-category__count">
+                  {category.courseCount}+ courses
+                </span>
+                <span className="course-category__cta">Browse pathways →</span>
+              </div>
             </Card>
           ))}
         </div>
@@ -44,7 +40,7 @@ function CourseCategories({ limit, showCta = true }) {
         {showCta && (
           <div className="text-center mt-6">
             <Button to="/courses" variant="outline">
-              Explore Courses
+              Explore All Courses
             </Button>
           </div>
         )}
