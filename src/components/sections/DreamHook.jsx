@@ -29,10 +29,6 @@ function DreamHook() {
                   style={{ objectPosition: option.imagePosition || 'center' }}
                   loading="lazy"
                 />
-                <span className="dream-hook__badge" aria-hidden="true">
-                  {option.icon}
-                </span>
-                <span className="dream-hook__hint">Open field →</span>
               </div>
 
               <div className="dream-hook__body">

@@ -56,10 +56,6 @@
         color: $color-primary-dark;
       }
 
-      .dream-hook__hint {
-        opacity: 1;
-        transform: translateY(0);
-      }
     }
 
     &:focus-visible {
@@ -120,46 +116,6 @@
       rgba(15, 23, 42, 0.25) 100%
     );
     pointer-events: none;
-  }
-
-  &__badge {
-    position: absolute;
-    top: $space-3;
-    right: $space-3;
-    z-index: 1;
-    @include flex-center;
-    width: 36px;
-    height: 36px;
-    border-radius: 12px;
-    background: rgba($color-white, 0.92);
-    box-shadow: $shadow-sm;
-    font-size: 1.05rem;
-    backdrop-filter: blur(6px);
-  }
-
-  &__hint {
-    position: absolute;
-    left: $space-2;
-    right: $space-2;
-    bottom: $space-2;
-    z-index: 1;
-    padding: 0.3rem 0.6rem;
-    border-radius: $radius-pill;
-    background: rgba(15, 23, 42, 0.55);
-    color: $color-white;
-    font-size: 0.65rem;
-    font-weight: $font-weight-medium;
-    letter-spacing: 0.01em;
-    text-align: center;
-    opacity: 0;
-    transform: translateY(4px);
-    transition: opacity $transition-base, transform $transition-base;
-    backdrop-filter: blur(4px);
-  }
-
-  &__option:hover &__hint {
-    opacity: 1;
-    transform: translateY(0);
   }
 
   &__body {

@@ -75,10 +75,6 @@ function CourseExplorer() {
                       style={{ objectPosition: field.imagePosition || 'center' }}
                       loading="lazy"
                     />
-                    <span className="course-gallery__badge" aria-hidden="true">
-                      {field.icon}
-                    </span>
-                    <span className="course-gallery__hint">Open field →</span>
                   </div>
 
                   <div className="course-gallery__body">
@@ -107,13 +103,16 @@ function CourseExplorer() {
   }
 
   /* ---------- Step 2: selected field detail ---------- */
-  const courseCount = countCoursesInField(selectedField);
-
   return (
     <section className="section course-explorer" id="course-catalogue" ref={detailRef}>
       <div className="container">
-        <button type="button" className="course-explorer__back" onClick={backToFields}>
-          ← All fields
+        <button
+          type="button"
+          className="course-explorer__back"
+          onClick={backToFields}
+          aria-label="Back to all fields"
+        >
+          ←
         </button>
 
         <header className={`course-hero course-hero--${selectedField.tone}`}>
@@ -125,16 +124,33 @@ function CourseExplorer() {
             />
           </div>
           <div className="course-hero__content">
-            <span className="course-hero__icon" aria-hidden="true">
-              {selectedField.icon}
-            </span>
-            <p className="course-hero__eyebrow">Course field</p>
             <h2 className="course-hero__title">{selectedField.name}</h2>
             <p className="course-hero__desc">{selectedField.description}</p>
-            {courseCount > 0 && (
-              <p className="course-hero__meta">
-                {selectedField.subcategories.length} areas · {courseCount} courses
-              </p>
+
+            {selectedField.id !== 'exploring' && selectedField.subcategories.length > 0 && (
+              <div className="course-subs" aria-label="Filter by area">
+                <button
+                  type="button"
+                  className={`course-subs__chip ${!activeSubId ? 'is-active' : ''}`}
+                  onClick={() => setActiveSubId(null)}
+                >
+                  All areas
+                </button>
+                {selectedField.subcategories.map((sub) => (
+                  <button
+                    key={sub.id}
+                    type="button"
+                    className={`course-subs__chip ${activeSubId === sub.id ? 'is-active' : ''}`}
+                    onClick={() => {
+                      setActiveSubId(sub.id);
+                      setOpenCourseId(null);
+                    }}
+                  >
+                    <strong>{sub.name}</strong>
+                    <span>{sub.courses.length}</span>
+                  </button>
+                ))}
+              </div>
             )}
           </div>
         </header>
@@ -154,30 +170,6 @@ function CourseExplorer() {
           </div>
         ) : (
           <>
-            <div className="course-subs">
-              <button
-                type="button"
-                className={`course-subs__chip ${!activeSubId ? 'is-active' : ''}`}
-                onClick={() => setActiveSubId(null)}
-              >
-                All areas
-              </button>
-              {selectedField.subcategories.map((sub) => (
-                <button
-                  key={sub.id}
-                  type="button"
-                  className={`course-subs__chip ${activeSubId === sub.id ? 'is-active' : ''}`}
-                  onClick={() => {
-                    setActiveSubId(sub.id);
-                    setOpenCourseId(null);
-                  }}
-                >
-                  <strong>{sub.name}</strong>
-                  <span>{sub.courses.length}</span>
-                </button>
-              ))}
-            </div>
-
             <div className="course-panels">
               {visibleSubs.map((sub) => (
                 <section key={sub.id} className="course-panel">
@@ -224,10 +216,25 @@ function CourseExplorer() {
                             </div>
 
                             <p className="course-card__blurb">{course.description}</p>
-                            <span className="course-card__more">
-                              {isOpen ? 'Hide details' : 'See career scope'}
-                            </span>
                           </button>
+
+                          <div className="course-card__actions">
+                            <button
+                              type="button"
+                              className="course-card__more"
+                              onClick={() =>
+                                setOpenCourseId((current) =>
+                                  current === course.id ? null : course.id
+                                )
+                              }
+                              aria-expanded={isOpen}
+                            >
+                              {isOpen ? 'Hide details' : 'See career scope'}
+                            </button>
+                            <Button to={guidanceLink(course.id)} size="sm">
+                              Connect with us
+                            </Button>
+                          </div>
 
                           {isOpen && (
                             <div className="course-card__detail">
@@ -235,9 +242,6 @@ function CourseExplorer() {
                                 <h5>Career scope</h5>
                                 <p>{course.scope}</p>
                               </div>
-                              <Button to={guidanceLink(course.id)} size="sm">
-                                Get free guidance
-                              </Button>
                             </div>
                           )}
                         </article>

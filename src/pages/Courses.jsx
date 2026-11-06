@@ -15,7 +15,7 @@ function Courses() {
       <CtaBanner
         title="Ready for personalised direction?"
         text="Share your goals and we’ll help you shortlist the right course and college path."
-        buttonLabel="Get Free Guidance"
+        buttonLabel="Connect with us"
       />
     </>
   );

@@ -5,7 +5,6 @@ import {
   ProcessStep,
   CtaBanner,
   DreamHook,
-  CourseCategories,
   GeographicStory,
 } from '../components/sections';
 import { services, processSteps } from '../data/services';
@@ -16,8 +15,6 @@ function Home() {
       <Hero />
 
       <DreamHook />
-
-      <CourseCategories />
 
       <section className="section section--soft">
         <div className="container">

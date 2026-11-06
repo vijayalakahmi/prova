@@ -43,21 +43,29 @@
   }
 
   &__back {
-    display: inline-flex;
-    align-items: center;
-    gap: $space-2;
+    @include flex-center;
+    width: 44px;
+    height: 44px;
     margin-bottom: $space-5;
     padding: 0;
-    border: 0;
-    background: transparent;
-    color: $color-primary;
-    font: inherit;
-    font-weight: $font-weight-semibold;
+    border: 1px solid $color-border;
+    border-radius: $radius-pill;
+    background: $color-white;
+    color: $color-heading;
+    font-size: 1.5rem;
+    font-weight: $font-weight-bold;
+    line-height: 1;
+    box-shadow: $shadow-sm;
     cursor: pointer;
-    transition: color $transition-fast;
+    transition: background $transition-fast, border-color $transition-fast, color $transition-fast,
+      box-shadow $transition-fast, transform $transition-fast;
 
     &:hover {
+      background: $color-primary-light;
+      border-color: $color-primary;
       color: $color-primary-dark;
+      box-shadow: $shadow-md;
+      transform: translateX(-2px);
     }
   }
 
@@ -114,10 +122,6 @@
         transform: scale(1.05);
       }
 
-      .course-gallery__hint {
-        opacity: 1;
-        transform: translateY(0);
-      }
     }
 
     &:focus-visible {
@@ -171,38 +175,6 @@
       background: linear-gradient(180deg, transparent 45%, rgba(15, 23, 42, 0.35) 100%);
       pointer-events: none;
     }
-  }
-
-  &__badge {
-    position: absolute;
-    top: $space-3;
-    left: $space-3;
-    z-index: 1;
-    @include flex-center;
-    width: 42px;
-    height: 42px;
-    border-radius: 14px;
-    background: rgba($color-white, 0.94);
-    box-shadow: $shadow-sm;
-    font-size: 1.2rem;
-    backdrop-filter: blur(6px);
-  }
-
-  &__hint {
-    position: absolute;
-    right: $space-3;
-    bottom: $space-3;
-    z-index: 1;
-    padding: 0.35rem 0.75rem;
-    border-radius: $radius-pill;
-    background: rgba(15, 23, 42, 0.72);
-    color: $color-white;
-    font-size: $font-size-xs;
-    font-weight: $font-weight-semibold;
-    opacity: 0;
-    transform: translateY(6px);
-    transition: opacity $transition-base, transform $transition-base;
-    backdrop-filter: blur(4px);
   }
 
   &__body {
@@ -325,25 +297,6 @@
     }
   }
 
-  &__icon {
-    @include flex-center;
-    width: 48px;
-    height: 48px;
-    margin-bottom: $space-4;
-    border-radius: 16px;
-    background: $color-bg-soft;
-    font-size: 1.4rem;
-  }
-
-  &__eyebrow {
-    margin: 0 0 $space-2;
-    font-size: $font-size-xs;
-    font-weight: $font-weight-semibold;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: $color-primary;
-  }
-
   &__title {
     margin: 0 0 $space-3;
     font-family: $font-family-heading;
@@ -360,35 +313,8 @@
     max-width: 36rem;
   }
 
-  &__meta {
-    margin: $space-4 0 0;
-    font-size: $font-size-sm;
-    font-weight: $font-weight-semibold;
-    color: $color-heading;
-  }
-
-  &--teal &__icon {
-    background: #f0fdfa;
-  }
-
-  &--indigo &__icon {
-    background: #eef2ff;
-  }
-
-  &--amber &__icon {
-    background: #fffbeb;
-  }
-
-  &--violet &__icon {
-    background: #f5f3ff;
-  }
-
-  &--rose &__icon {
-    background: #fff1f2;
-  }
-
-  &--slate &__icon {
-    background: #f8fafc;
+  .course-subs {
+    margin-top: $space-5;
   }
 }
 
@@ -397,8 +323,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: $space-2;
-  margin-bottom: $space-6;
-  animation: courseReveal 0.4s ease;
 
   &__chip {
     display: inline-flex;
@@ -514,7 +438,7 @@
     align-items: flex-start;
     gap: $space-3;
     width: 100%;
-    padding: $space-5;
+    padding: $space-5 $space-5 $space-3;
     border: 0;
     background: transparent;
     text-align: left;
@@ -581,19 +505,38 @@
     @include truncate(3);
   }
 
-  &__more {
+  &__actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $space-3;
+    width: 100%;
+    padding: 0 $space-5 $space-5;
     margin-top: auto;
+
+    @include respond-down(sm) {
+      flex-wrap: wrap;
+    }
+  }
+
+  &__more {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    font: inherit;
     font-size: $font-size-sm;
     font-weight: $font-weight-semibold;
     color: $color-primary;
+    cursor: pointer;
+    text-align: left;
+
+    &:hover {
+      color: $color-primary-dark;
+    }
   }
 
   &__detail {
     padding: 0 $space-5 $space-5;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: $space-4;
     animation: courseReveal 0.25s ease;
   }
 
